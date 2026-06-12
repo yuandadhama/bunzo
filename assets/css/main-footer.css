@@ -286,7 +286,19 @@
   border: none;
 }
 
-.blue-dialogika-btn:hover {
+.blue-dialogika-btn-circle {
+  padding: 5px 10px;
+  color: #fff;
+  background: linear-gradient(to bottom, #0f61a8 5%, #0b2b6a 100%);
+  box-shadow: 0px 5px 16px -6px rgba(114, 4, 207, 1);
+  -webkit-box-shadow: 0px 5px 16px -6px rgba(114, 4, 207, 1);
+  white-space: nowrap;
+  border-radius: 50px;
+  transition: 0.3s;
+  border: none;
+}
+.blue-dialogika-btn:hover,
+.blue-dialogika-btn-circle:hover {
   background-color: #0b2b6a;
   background: linear-gradient(to bottom, #0b2b6a 5%, #0f61a8 100%);
   cursor: pointer;

@@ -184,10 +184,6 @@
       /* -----------------------------------------------
                BASE FONT
             ----------------------------------------------- */
-      .article-new-components,
-      .article-new-components * {
-        font-family: "Gordita", sans-serif;
-      }
 
       /* -----------------------------------------------
                READING PROGRESS BAR
@@ -212,7 +208,7 @@
         gap: 6px;
         background: #f0f4ff;
         color: #1a3266;
-        font-family: "Gordita", sans-serif;
+
         font-size: 13px;
         font-weight: 600;
         padding: 4px 24px;
@@ -253,12 +249,11 @@
       .watermark-container::after {
         content: "";
         position: absolute;
-        top: 16px;
-        left: 18px;
+        top: -60px;
         z-index: 11;
-        width: 140px;
-        height: 40px;
-        background-image: url("assets/images/logo/logo.png");
+        width: 150px;
+        height: 180px;
+        background-image: url("assets/images/logo/logo-outlined.png");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -266,10 +261,158 @@
       }
 
       /* -----------------------------------------------
+               WHATSAPP WATERMARK (bottom-right)
+            ----------------------------------------------- */
+      /* -----------------------------------------------
+   WHATSAPP BADGE — Fixed & Enhanced
+----------------------------------------------- */
+      .watermark-container .whatsapp-watermark {
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        z-index: 12;
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px 8px 8px;
+        border-radius: 50px;
+        background: #25d366;
+        color: #ffffff;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        text-decoration: none;
+        animation: wa-bubble-pop 3.2s ease-in-out infinite;
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          padding 0.25s ease;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+      }
+
+      /* HOVER STATE */
+      .watermark-container .whatsapp-watermark:hover {
+        background: #1aab52;
+        transform: translateY(-4px) scale(1.04);
+        box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
+        border-color: rgba(255, 255, 255, 0.6);
+        animation-play-state: paused;
+      }
+
+      /* Tail / caret */
+      .watermark-container .whatsapp-watermark::after {
+        content: "";
+        position: absolute;
+        right: 16px;
+        bottom: -6px;
+        width: 11px;
+        height: 11px;
+        background: #25d366;
+        transform: rotate(45deg);
+        border-radius: 2px;
+        transition: background 0.25s ease;
+      }
+
+      .watermark-container .whatsapp-watermark:hover::after {
+        background: #1aab52;
+      }
+
+      /* Icon wrapper — key fix: fixed size, no width:100% leak */
+      .watermark-container .whatsapp-watermark .wa-icon-wrap {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px; /* prevents shrink/grow */
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.25s ease;
+      }
+
+      .watermark-container .whatsapp-watermark:hover .wa-icon-wrap {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      /* The icon image itself — must NOT inherit container's width:100% */
+      .watermark-container .whatsapp-watermark .wa-icon-wrap img {
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0;
+        display: block;
+        object-fit: contain;
+        pointer-events: none;
+        -webkit-user-drag: none;
+        border-radius: 0; /* override container's img border-radius */
+      }
+
+      .watermark-container .whatsapp-watermark .wa-number {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        transition: letter-spacing 0.25s ease;
+      }
+
+      .watermark-container .whatsapp-watermark:hover .wa-number {
+        letter-spacing: 0.6px;
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .watermark-container .whatsapp-watermark {
+          right: 10px;
+          bottom: 10px;
+          padding: 6px 10px 6px 6px;
+          gap: 6px;
+        }
+        .watermark-container .whatsapp-watermark .wa-icon-wrap {
+          width: 24px;
+          height: 24px;
+          flex: 0 0 24px;
+        }
+        .watermark-container .whatsapp-watermark .wa-icon-wrap img {
+          width: 15px !important;
+          height: 15px !important;
+        }
+        .watermark-container .whatsapp-watermark .wa-number {
+          font-size: 11px;
+        }
+      }
+
+      /* -----------------------------------------------
+               H2 WATERMARK CONTAINER (logo upper-left)
+            ----------------------------------------------- */
+      .h2-watermark-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .h2-watermark-container::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 46px;
+        height: 46px;
+        background-image: url("assets/images/logo/logo-outlined.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      /* No WhatsApp badge for H2 watermark */
+      .h2-watermark-container .whatsapp-watermark {
+        display: none !important;
+      }
+
+      /* -----------------------------------------------
                HIGHLIGHT & BADGE
             ----------------------------------------------- */
       .highlight {
-        background: linear-gradient(120deg, #fff3cd 0%, #ffe082 100%);
+        background: #fff3cd;
         padding: 2px 4px;
         border-radius: 3px;
         font-weight: 600;
@@ -280,7 +423,7 @@
         display: inline-block;
         background: #1a3266;
         color: #f0a500;
-        font-family: "Gordita", sans-serif;
+
         font-size: 10px;
         font-weight: 700;
         letter-spacing: 1.2px;
@@ -307,18 +450,33 @@
         color: #fff;
         border-radius: 15px;
         transition: all 0.2s ease;
+        padding: 6px 18px;
       }
 
       .tags-color:hover {
         background: #0b2b6a;
         color: #fff;
-        opacity: 0.8;
       }
 
       .social-share-area {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
+      }
+
+      .social-share-area a {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+      }
+
+      .social-share-area a i:hover {
+        color: white;
       }
 
       /* -----------------------------------------------
@@ -333,7 +491,6 @@
       }
 
       .key-takeaways-section .kt-title {
-        font-family: "Gordita", sans-serif;
         font-size: 16px;
         font-weight: 700;
         color: #1a3266;
@@ -352,7 +509,6 @@
       }
 
       .key-takeaways-section ul li {
-        font-family: "Gordita", sans-serif;
         font-size: 14px;
         color: #333;
         padding: 7px 0;
@@ -382,7 +538,6 @@
       }
 
       .faq-section .faq-title {
-        font-family: "Gordita", sans-serif;
         font-size: 18px;
         font-weight: 700;
         color: #1a3266;
@@ -410,7 +565,7 @@
         border: none;
         padding: 16px 20px;
         text-align: left;
-        font-family: "Gordita", sans-serif;
+
         font-size: 14px;
         font-weight: 700;
         color: #1a3266;
@@ -449,7 +604,7 @@
           opacity 250ms ease,
           transform 250ms ease;
         padding: 0 20px 0;
-        font-family: "Gordita", sans-serif;
+
         font-size: 14px;
         color: #555;
         line-height: 1.7;
@@ -484,7 +639,6 @@
       }
 
       .download-cheatsheet-label {
-        font-family: "Gordita", sans-serif;
         font-size: 12px;
         color: #999;
         margin-top: 10px;
@@ -507,7 +661,6 @@
       }
 
       .engagement-label {
-        font-family: "Gordita", sans-serif;
         font-size: 13px;
         color: #888;
         flex-grow: 1;
@@ -522,7 +675,7 @@
         border-radius: 50px;
         padding: 9px 20px;
         cursor: pointer;
-        font-family: "Gordita", sans-serif;
+
         font-size: 14px;
         font-weight: 700;
         color: #1a3266;
@@ -561,7 +714,7 @@
         border-radius: 50px;
         padding: 9px 20px;
         cursor: pointer;
-        font-family: "Gordita", sans-serif;
+
         font-size: 14px;
         font-weight: 700;
         color: #b37800;
@@ -586,7 +739,7 @@
         transform: translateX(-50%);
         background: #1a3266;
         color: #fff;
-        font-family: "Gordita", sans-serif;
+
         font-size: 13px;
         font-weight: 600;
         padding: 10px 24px;
@@ -615,7 +768,6 @@
                ARTICLE H1
             ----------------------------------------------- */
       .article-h1 {
-        font-family: "Gordita", sans-serif;
         font-size: 28px;
         font-weight: 800;
         color: #1a1a2e;
@@ -818,6 +970,123 @@
           padding: 35px 30px;
         }
       }
+      /* -----------------------------------------------
+               HEADER INLINE SEARCH
+            ----------------------------------------------- */
+      .header-inline-search {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-left: 20px;
+      }
+
+      .header-inline-search__input {
+        width: 220px;
+        height: 45px;
+        border-radius: 5px;
+        border: 1px solid #f4f4f4;
+        padding: 0 14px;
+        background: #ffffff;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .header-inline-search__input:focus {
+        border-color: #0b2b6a;
+      }
+
+      .header-inline-search__button {
+        height: 45px;
+        width: 45px;
+        min-width: 45px;
+        border-radius: 5px;
+        border: 0;
+        background: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: all 0.2s ease;
+      }
+
+      .header-inline-search__button:hover {
+        opacity: 0.7;
+      }
+
+      .header-inline-search__button img {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        filter: none;
+      }
+
+      @media only screen and (max-width: 991px) {
+        .header-inline-search__input {
+          width: 140px;
+        }
+        .header-inline-search {
+          margin-left: 7px;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        .header-inline-search {
+          margin-left: 0;
+        }
+        .header-inline-search__input {
+          width: 160px;
+        }
+      }
+
+      /* -----------------------------------------------
+   H2 SECTION IMAGE — watermark without WA badge
+----------------------------------------------- */
+      .h2-image-container {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border-radius: 10px;
+        line-height: 0;
+        margin: 16px 0 24px;
+      }
+
+        .h2-image-container img.h2-section-img {
+          width: 100%;
+          display: block;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 10px;  
+          -webkit-user-drag: none;
+          pointer-events: none;
+        }
+
+    .h2-image-container::after {
+      content: "";
+      position: absolute;
+      top: -60px;
+      left: 0;
+      z-index: 11;
+      width: 150px;
+      height: 180px;
+      background-image: url("assets/images/logo/logo-outlined.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .h2-image-container img.h2-section-img {
+        height: 150px;
+      }
+      .h2-image-container::after {
+        top: -40px;
+        width: 100px;
+        height: 120px;
+      }
+    }
     </style>
   </head>
 
@@ -912,13 +1181,23 @@
             </div>
             <div class="col-lg-3 col-md-4 col-7">
               <div class="header-mid-right-side">
-                <a
-                  href="javascript:void(0)"
-                  id="search-overlay-trigger"
-                  class="single-action-item"
-                >
-                  <img src="assets/images/icons/search.png" alt="" />
-                </a>
+                <form class="header-inline-search" action="#" method="get">
+                  <input
+                    type="search"
+                    name="q"
+                    id="header-search-input"
+                    class="header-inline-search__input"
+                    placeholder="Cari artikel..."
+                    autocomplete="off"
+                  />
+                  <button
+                    type="submit"
+                    class="header-inline-search__button"
+                    aria-label="Search"
+                  >
+                    <img src="assets/images/icons/search.png" alt="" />
+                  </button>
+                </form>
               </div>
             </div>
           </div>
@@ -936,6 +1215,7 @@
                     href="https://x.com/dialogika_co"
                     target="_blank"
                     rel="noopener noreferrer"
+                    class="blue-dialogika-btn"
                   >
                     <i class="icofont-twitter"></i>
                   </a>
@@ -945,6 +1225,7 @@
                     href="https://www.facebook.com/dialogika.co"
                     target="_blank"
                     rel="noopener noreferrer"
+                    class="blue-dialogika-btn"
                   >
                     <i class="icofont-facebook"></i>
                   </a>
@@ -954,6 +1235,7 @@
                     href="https://www.instagram.com/dialogika.co"
                     target="_blank"
                     rel="noopener noreferrer"
+                    class="blue-dialogika-btn"
                   >
                     <i class="icofont-instagram"></i>
                   </a>
@@ -963,6 +1245,7 @@
                     href="https://www.linkedin.com/company/dialogika"
                     target="_blank"
                     rel="noopener noreferrer"
+                    class="blue-dialogika-btn"
                   >
                     <i class="icofont-linkedin"></i>
                   </a>
@@ -1231,7 +1514,6 @@
               <ul class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Public Speaking</a></li>
-                <li class="breadcrumb-item active">Blog Details</li>
               </ul>
             </div>
           </div>
@@ -1259,7 +1541,30 @@
                       width="700"
                       height="450"
                       loading="eager"
+                      style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 12px;
+                      "
                     />
+                    <a
+                      class="whatsapp-watermark"
+                      aria-label="WhatsApp +62 851 6299 2597"
+                      href="https://wa.me/+6285162992597"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div class="wa-icon-wrap">
+                        <img
+                          src="assets/images/icons/whatsapp.png"
+                          alt="WhatsApp"
+                          width="18"
+                          height="18"
+                        />
+                      </div>
+                      <span class="wa-number">+62 851 6299 2597</span>
+                    </a>
                   </div>
 
                   <div class="blog-details-post-content article-new-components">
@@ -1310,9 +1615,17 @@
                         dampaknya jauh lebih serius dari sekadar "grogi biasa".
                       </p>
 
-                      <h2>Apa Itu Glossophobia? Bukan Sekadar Gugup Biasa</h2>
-
-                      <p>
+                      <h2>
+                        Apa Itu Glossophobia? Bukan Sekadar Gugup Biasa
+                      </h2>
+                      <div class="h2-image-container">
+<img
+  class="h2-section-img"
+  src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=800&h=200&fit=crop"
+  alt="Ilustrasi glossophobia — ketakutan berbicara di depan umum"
+  loading="lazy"
+/>
+</div>
                         Glossophobia berasal dari kata Yunani
                         <i>glossa</i> (lidah) dan <i>phobos</i>
                         (ketakutan). Secara klinis, ini bukan sekadar rasa gugup
@@ -1347,6 +1660,14 @@
                       </p>
 
                       <h2>Gejala Fisik yang Wajib Kamu Kenali</h2>
+                      <div class="h2-image-container">
+  <img
+    class="h2-section-img"
+    src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=200&fit=crop"
+    alt="Ilustrasi gejala fisik kecemasan saat public speaking"
+    loading="lazy"
+  />
+</div>
 
                       <p>
                         Saat glossophobia menyerang, tubuh bereaksi seolah
@@ -1390,6 +1711,14 @@
                       </blockquote>
 
                       <h2>Bahaya Jangka Panjang yang Sering Diabaikan</h2>
+                      <div class="h2-image-container">
+  <img
+    class="h2-section-img"
+    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=200&fit=crop"
+    alt="Ilustrasi dampak jangka panjang glossophobia pada karier"
+    loading="lazy"
+  />
+</div>
 
                       <p>
                         Banyak orang berpikir glossophobia "tidak berbahaya"
@@ -1443,15 +1772,9 @@
                       <!-- Tags -->
                       <div class="blog-details-tag-and-share-area">
                         <div class="post-tags-area">
-                          <a href="#" class="btn-medium tags-color"
-                            >Public Speaking</a
-                          >
-                          <a href="#" class="btn-medium tags-color"
-                            >Glossophobia</a
-                          >
-                          <a href="#" class="btn-medium tags-color"
-                            >Self-Development</a
-                          >
+                          <a href="#" class="tags-color">Public Speaking</a>
+                          <a href="#" class="tags-color">Glossophobia</a>
+                          <a href="#" class="tags-color">Self-Development</a>
                         </div>
                         <ul class="social-share-area">
                           <li>
@@ -1501,14 +1824,17 @@
                         >Artikel ini bermanfaat? Beri tepukan!</span
                       >
                       <button
-                        class="btn-clap"
+                        class="blue-dialogika-btn"
                         id="clapBtn"
                         onclick="handleClap()"
                       >
                         <span class="clap-emoji">👏</span>
                         <span class="clap-count" id="clapCount">0</span>
                       </button>
-                      <button class="btn-share-link" onclick="handleShare()">
+                      <button
+                        class="blue-dialogika-btn"
+                        onclick="handleShare()"
+                      >
                         <i class="icofont-ui-copy"></i>
                         Salin Link
                       </button>
@@ -1655,16 +1981,16 @@
                         </div>
                         <div class="col-lg-4 col-5">
                           <div class="related-post-slider-navigation text-end">
-                            <div
-                              class="related-post-button-prev navigation-button"
+                            <button
+                              class="related-post-button-prev blue-dialogika-btn-circle"
                             >
                               <i class="icofont-long-arrow-left"></i>
-                            </div>
-                            <div
-                              class="related-post-button-next navigation-button"
+                            </button>
+                            <button
+                              class="related-post-button-next blue-dialogika-btn-circle"
                             >
                               <i class="icofont-long-arrow-right"></i>
-                            </div>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -1765,13 +2091,6 @@
                   </div>
                   <div class="tgAbout-social">
                     <a
-                      href="https://instagram.com/dialogika.co"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i class="bi bi-instagram"></i>
-                    </a>
-                    <a
                       href="https://twitter.com/dialogika_co"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -1784,6 +2103,13 @@
                       rel="noopener noreferrer"
                     >
                       <i class="bi bi-facebook"></i>
+                    </a>
+                    <a
+                      href="https://instagram.com/dialogika.co"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i class="bi bi-instagram"></i>
                     </a>
                     <a
                       href="https://youtube.com/@dialogika_co"
@@ -1801,28 +2127,36 @@
                     <img src="assets/images/catagory/technology.jpg" alt="" />
                     <div class="hero-category-inner-box">
                       <h3 class="title">Business</h3>
-                      <i class="icon icofont-long-arrow-right"></i>
+                      <div class="blue-dialogika-btn-circle">
+                        <i class="icon icofont-long-arrow-right"></i>
+                      </div>
                     </div>
                   </a>
                   <a class="single-hero-category-item">
                     <img src="assets/images/catagory/travel.jpg" alt="" />
                     <div class="hero-category-inner-box">
                       <h3 class="title">Travel</h3>
-                      <i class="icon icofont-long-arrow-right"></i>
+                      <div class="blue-dialogika-btn-circle">
+                        <i class="icon icofont-long-arrow-right"></i>
+                      </div>
                     </div>
                   </a>
                   <a class="single-hero-category-item">
                     <img src="assets/images/catagory/medical.jpg" alt="" />
                     <div class="hero-category-inner-box">
                       <h3 class="title">Food</h3>
-                      <i class="icon icofont-long-arrow-right"></i>
+                      <div class="blue-dialogika-btn-circle">
+                        <i class="icon icofont-long-arrow-right"></i>
+                      </div>
                     </div>
                   </a>
                   <a class="single-hero-category-item">
                     <img src="assets/images/catagory/web.jpg" alt="" />
                     <div class="hero-category-inner-box">
                       <h3 class="title">Tech</h3>
-                      <i class="icon icofont-long-arrow-right"></i>
+                      <div class="blue-dialogika-btn-circle">
+                        <i class="icon icofont-long-arrow-right"></i>
+                      </div>
                     </div>
                   </a>
                 </div>
@@ -1834,12 +2168,16 @@
                       <h4>Latest Post</h4>
                     </div>
                     <div class="latest-post-slider-navigation">
-                      <div class="latest-post-button-prev navigation-button">
+                      <button
+                        class="latest-post-button-prev blue-dialogika-btn-circle"
+                      >
                         <i class="icofont-long-arrow-left"></i>
-                      </div>
-                      <div class="latest-post-button-next navigation-button">
+                      </button>
+                      <button
+                        class="latest-post-button-next blue-dialogika-btn-circle"
+                      >
                         <i class="icofont-long-arrow-right"></i>
-                      </div>
+                      </button>
                     </div>
                   </div>
                   <div class="swiper-container latest-post-slider-active">
@@ -2047,9 +2385,7 @@
                       placeholder="Enter your email"
                     />
                     <div class="button-box">
-                      <a href="#" class="btn-primary btn-large"
-                        >Subscribe Now</a
-                      >
+                      <a href="#" class="blue-dialogika-btn">Subscribe Now</a>
                     </div>
                   </div>
                 </div>
@@ -2077,7 +2413,7 @@
     <!--====== End of footer area ========-->
 
     <!-- Search Overlay -->
-    <div class="search-overlay" id="search-overlay">
+    <!-- <div class="search-overlay" id="search-overlay">
       <div class="search-overlay__header">
         <div class="container-fluid">
           <div class="row align-items-center">
@@ -2101,10 +2437,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Scroll Top -->
-    <a href="#" class="scroll-top" id="scroll-top">
+    <a href="#" class="scroll-top blue-dialogika-btn-circle" id="scroll-top">
       <i class="arrow-top icofont-swoosh-up"></i>
       <i class="arrow-bottom icofont-swoosh-up"></i>
     </a>

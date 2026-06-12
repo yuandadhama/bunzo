@@ -227,6 +227,85 @@
         background: transparent;
       }
 
+      /* === WHATSAPP WATERMARK (bottom-right) === */
+      .watermark-container .whatsapp-watermark {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        z-index: 12;
+        pointer-events: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 14px;
+        background: #25d366;
+        color: #ffffff;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+        text-decoration: none;
+        animation: wa-bubble-pop 3.2s ease-in-out infinite;
+      }
+
+      .watermark-container .whatsapp-watermark::after {
+        content: "";
+        position: absolute;
+        right: 14px;
+        bottom: -6px;
+        width: 12px;
+        height: 12px;
+        background: #25d366;
+        transform: rotate(45deg);
+        border-radius: 2px;
+      }
+
+      .watermark-container .whatsapp-watermark .wa-badge {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(240, 165, 0, 0.18);
+        border: 1px solid rgba(240, 165, 0, 0.35);
+        color: #f0a500;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .watermark-container .whatsapp-watermark .wa-number {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 768px) {
+        .watermark-container .whatsapp-watermark {
+          right: 10px;
+          bottom: 10px;
+          padding: 5px 8px;
+          gap: 6px;
+          animation-duration: 3.2s;
+        }
+        .watermark-container .whatsapp-watermark::after {
+          right: 12px;
+          bottom: -5px;
+          width: 10px;
+          height: 10px;
+        }
+        .watermark-container .whatsapp-watermark .wa-badge {
+          width: 22px;
+          height: 22px;
+          font-size: 12px;
+        }
+        .watermark-container .whatsapp-watermark .wa-number {
+          font-size: 11px;
+        }
+      }
+
       /* === HIGHLIGHT SPAN === */
       .highlight {
         background: linear-gradient(120deg, #fff3cd 0%, #ffe082 100%);
@@ -874,6 +953,17 @@
                       height="450"
                       loading="eager"
                     />
+                    <a class="whatsapp-watermark" aria-label="WhatsApp +62 851 6299 2597" href="https://wa.me/+6285162992597" target="_blank" rel="noopener noreferrer">
+                      <div>
+                        <img
+                          src="assets/images/icons/whatsapp.png"
+                          alt="WhatsApp"
+                          width="20"
+                          height="20"
+                        />
+                      </div>
+                      <span class="wa-number">+62 851 6299 2597</span>
+                    </a>
                   </div>
 
                   <div class="blog-details-post-content article-new-components">
